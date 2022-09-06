@@ -1,12 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-   <div>반가워요</div>
+   <script>
+    // 편의점에 들어가서 음료수를 사고 나오는 상황
+            function go_convenient(){
+                console.log('편의점에 들어가서 어떤 음료를 살지 고민한다.');
+            }
+            function pick(){
+                return new Promise(function(resolve,reject){
+                    setTimeout(function() {
+                    console.log('고민이 끝났다!');
+                    product = "콜라";
+                    payment = 1500;
+                    resolve();
+                }, 2000);
+                })
+                
+            }
+            function pay(){
+                console.log(`${product}의 금액인 ${payment}원을 지불한다.`);
+            }
+            var product;
+            var payment;
+
+            // async function exec(){  //1.await은 async 함수 내에서만 사용 가능
+            //                         //2.await은 함수가 return Promise 할 때 사용 가능
+                
+            //     var product;
+            //     var payment;
+            //     go_convenient(); //Promise 사용시 
+            //     await pick();
+            //     pay();
+            // }
+            // exec();
+
+
+            // go_convenient(); //Promise 사용시 
+            // pick()
+            // .then(pay);
+
+
+                //1.await은 async 함수 내에서만 사용 가능
+                //2.await은 함수가 return Promise 할 때 사용 가능
+
+            // function add(n1,n2){
+            //     return new Promise(function(resolve, reject){
+            //         setTimeout(function(){
+            //             var result = n1+n2;
+            //             resolve(result);
+            //         },1000);
+            //     })
+            // }
+            
+            // function mul(num){
+            //     return new Promise(function(resolve,reject){
+            //         setTimeout(function(){
+            //             var result = num*3;
+            //             resolve(result);
+            //         },700);
+            //     })
+            // }
+
+            // function sub(num){
+            //     return new Promise(function(resolve,reject){
+            //         setTimeout(function(){
+            //             var result = num-2;
+            //             resolve(result);
+            //          },500);
+
+            //   })
+                   
+            // }
+
+            // add(3,2)
+            // .then((result)=>{
+            //     console.log("1 : ",result);
+            //     return mul(result);
+            // })
+            // .then((result)=>{
+            //     console.log("2 : ",result);
+            //     return sub(result);
+            // })
+            // .then((result)=>{
+            //     console.log("3 : ",result);
+            // })
+
+
+            function call(name){
+                return new Promise(function(resolve,reject){
+                    setTimeout(function(){
+                        var result = name;
+                        resolve(result);
+                    },1000)
+                })
+            }
+            function back(){
+                return new Promise(function(resolve,reject){
+                    setTimeout(function(){
+                        var result = "back";
+                        resolve(result);
+                    },1000)
+                })
+            }
+            function hell(){
+                return new Promise(function(resolve,reject){
+                    setTimeout(function(){
+                        var result = "callbackhell";
+                        resolve(result);
+                    },1000)
+                })
+            }
+
+            async function exec(){
+                let name = await call("kim");
+                console.log(name+"반가워");
+                let back1 = await back();
+                console.log(back1+"을 실행했구나?");
+                let hell1 = await hell();
+                console.log("여기는"+hell1);
+            }
+            exec();
+
+
+            // call("kim")
+            // .then((result)=>{
+            //     console.log(result+"반가워");
+            //     return back();
+            // })
+            // .then((result)=>{
+            //     console.log(result+"을 실행했구나");
+            //     return hell();
+            // })
+            // .then((result)=>{
+            //     console.log("여기는"+result);
+            // })
+
+
+
+        //    function promise1(flag){
+        //     return new Promise(function(resolve, reject){
+        //         if(flag){
+        //             resolve("성공");
+        //         }else{
+        //             reject("실패");
+        //         }
+        //     })
+        //    }
+
+        //    promise1(true)
+        //    .then((result)=>{
+        //     console.log(result);
+        //     console.log("then");
+        //    })
+        //    .catch((err)=>{
+        //     console.log(err);
+        //     console.log("catch");
+        //    })
+        //    promise1(false);
+
+   </script>
 </body>
 </html>

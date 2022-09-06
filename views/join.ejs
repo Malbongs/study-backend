@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <style>
+        .container{
+            border-radius: 20px;
+            position: relative;
+            text-align: center;
+            left: 30%;
+            top: 200px;
+            width: 400px;
+            height: 400px;
+            background-color: black;
+            color: white;
+        }
+     
+        .box{
+            position: relative;
+            top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div class="box">
+                <h1>회원가입</h1><br>
+                <div class="tag">
+                    이름:<input type="text" name="name" required><br><br>
+                    아이디:<input type="text" name="id" required><br><br>
+                    비밀번호:<input type="password" name="pass" required><br><br>
+                    닉네임:<input type="text" name = "nickname" required><br><br>
+                    생년월일:<select name="year" required>
+                        <%for(var year=1950; year <=2022; year++){%>
+                        <option value="<%=year%>"><%=year%></option>
+                            <% }%>
+                    </select>년
+                    <select name="month" required>
+                        <%for(var month=1; month<13; month++){%>
+                            <option value="<%=month%>"><%=month%></option>
+                            <% }%>
+                    </select>월
+                    <select name="day" required>
+                        <%for(var day=1; day<32; day++){%>
+                            <option value="<%=day%>"><%=day%></option>
+                            <% }%>
+                    </select>일<br><br>
+                    <button type="button" onclick="join()">회원가입</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function join(){
+            var form = document.querySelector("form");
+            var birthday = form.year.value+"-"+form.month.value+"-"+form.day.value;
+
+            var data  = {
+                id: form.id.value,
+                name: form.name.value,
+                password: form.pass.value,
+                nickname: form.nickname.value,
+                birthday
+            }
+
+            axios({
+                url:"/join/insert",
+                method:"post",
+                data: data
+            }).then((response)=>{
+                console.log(response.data);
+                alert("회원가입을 축하드립니다.");
+                window.location = "/log";
+
+            })
+
+        }
+
+    </script>
+</body>
+</html>

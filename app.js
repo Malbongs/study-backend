@@ -1,8 +1,10 @@
 const express = require("express"); //express 모델 불러오기 
 const app = express();   //app 에 담기
 const multer = require("multer"); //multer 모델 불러오기
+const mysql = require("mysql"); //mysql 불러오기
 const path = require("path"); //path 모델 불러오기
 const upload = multer({ //업로드 파일을 지정하고 업로드하기
+
     storage: multer.diskStorage({
         destination(req, file, done){
             done( null, 'uploads/');
@@ -25,11 +27,15 @@ app.use(express.json());
 const port = 8000; //8000번 포트로 연결
 //ip:8000/
 app.get("/",(req,res)=>{//다음 주소를 정해주는 문자열 req(request약자)클라이언트가 사버에게    res(restuns)서버가 클라이언트한테 보내는 응답
-    res.render("main"); 
+    res.render("test1"); 
 }) 
 
+
+//파일 업로드 동적 실행
 app.post("/upload",upload.single("userfile"),(req,res)=>{ //업로드 주소
     
+    console.log(req.body);
+    console.log(req.file);
     var datas={
     path: req.file.path,
     body: req.body,
@@ -87,10 +93,7 @@ app.post("/post/axios",(req,res)=>{
         res.send("로그인 성공");
     }else{
         res.send("로그인 실패");
-    }
-
-    
-
+    } 
 })
 // app.get("/test",(req,res)=>{
 //     res.render("test1");

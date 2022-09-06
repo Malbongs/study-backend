@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box{
+            
+            border-radius: 20px;
+            position: relative;
+            text-align: center;
+            left: 30%;
+            top: 200px;
+            width: 300px;
+            height: 300px;
+            background-color: black;
+            color: white;
+        }
+        .box2{
+            position: relative;
+            top: 70px;
+        }
+        #no{
+            position: relative;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="box">
+        <form>
+            <div class="box2">
+                <h1>로그인</h1>
+                ID:<input type="text" name="id"><br>
+                PASS:<input type="password" name="pass"><br><br>
+                <button type="button" onclick="dynamicForm()">로그인</button>
+            </div>
+        </form>
+        <div id="no"></div>
+    </div>
+</body>
+</html>
+<script> 
+    function dynamicForm(){
+            const form = document.querySelector("form");
+            
+            const data={
+                id: form.id.value,
+                pass: form.pass.value
+            }
+            console.log(data);
+            axios ({
+                url:"/login",
+                method:"post",
+                data: data
+            }).then((response)=>{
+                if(response.data =="로그인 성공"){
+                    alert("로그인 성공!")
+                    window.location = "/my?id="+data.id;
+                   
+                }else{
+                    
+                    $("#no").append(`<div style="color:red;">${response.data}</div>`);
+                }console.log(response.data);
+            })
+        }
+            
+</script>
